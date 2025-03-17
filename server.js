@@ -24,7 +24,7 @@ wss.on('connection', (ws) => {
 
             if (action === 'request') {
                 // Store request in DB
-                await db.query("INSERT INTO transactions (transactionId, username) VALUES (?, ?)", [transactionId, username]);
+                await db.query("INSERT INTO transactions (transactionId, username, status) VALUES (?, ?, 'pending')", [transactionId, username]);
 
                 // Start a termination timer
                 const timer = setTimeout(() => terminateRequest(transactionId), 60000);
